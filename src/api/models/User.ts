@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable func-names */
 import mongoose from 'mongoose';
 
@@ -11,11 +13,11 @@ export interface UserDocument extends mongoose.Document {
   email: string;
   password: string;
   cin: string;
-  sickness: string;
-  effect: string;
+  phone: string;
+  city: string;
   createdAt: Date;
   updatedAt: Date;
-  comparePassword(candidatePassword: string): Promise<boolean>
+  // comparePassword(candidatePassword: string): Promise<boolean>;
 }
 export const UserSchema = new mongoose.Schema(
   {
@@ -41,13 +43,12 @@ export const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    sickness: {
+    phone: {
       type: String,
+      required: true,
+      unique: true,
     },
-    treatments: {
-      type: String,
-    },
-    effect: {
+    city: {
       type: String,
     },
   },
@@ -76,6 +77,6 @@ UserSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
 };
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model<UserDocument>('User', UserSchema);
 
 export default UserModel;

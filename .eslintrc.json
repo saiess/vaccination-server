@@ -25,7 +25,7 @@
         "ts": "never",
         "tsx": "never"
       }
-   ]
+    ]
   },
   "settings": {
     "import/resolver": {

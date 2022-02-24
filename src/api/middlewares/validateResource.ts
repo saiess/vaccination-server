@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
 
 import { AnyZodObject } from 'zod';
@@ -9,6 +12,7 @@ const validate = (schema: AnyZodObject) => (req: Request, res: Response, next: N
       query: req.query,
       params: req.params,
     });
+    next();
   } catch (e: any) {
     return res.status(400).send(e.errors);
   }
