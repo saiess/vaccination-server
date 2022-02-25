@@ -3,8 +3,15 @@ import { Request, Response, NextFunction } from 'express';
 import { VerifyJwt } from '../../utils/Jwt.Utiles';
 import { reIssueAccessToken } from '../services/Session.Service';
 
-const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
-  const accessToken = get(req, 'headrs.authorization', '').replace(/^Bearer\s/, '');
+const deserializeUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const accessToken = get(req, 'headrs.authorization', '').replace(
+    /^Bearer\s/,
+    '',
+  );
   const refreshToken = get(req, 'headers.x-refesh');
 
   if (!accessToken) {

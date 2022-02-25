@@ -8,17 +8,36 @@ import {
 import requireUser from '../middlewares/requireUser';
 import validate from '../middlewares/validateResource';
 import {
-  CreateRegionSchema, DeleteRegionSchema, GetRegionSchema, UpdateRegionSchema,
+  CreateRegionSchema,
+  DeleteRegionSchema,
+  GetRegionSchema,
+  UpdateRegionSchema,
 } from '../schema/Region.Schema';
 
 function regionRoutes(app: Express) {
-  app.post('/api/regions', [requireUser, validate(CreateRegionSchema), CreateRegionHandler]);
+  app.post('/api/regions', [
+    requireUser,
+    validate(CreateRegionSchema),
+    CreateRegionHandler,
+  ]);
 
-  app.put('/api/regions/:regionId', [requireUser, validate(UpdateRegionSchema), UpdateRegionHandler]);
+  app.put('/api/regions/:regionId', [
+    requireUser,
+    validate(UpdateRegionSchema),
+    UpdateRegionHandler,
+  ]);
 
-  app.get('/api/regions', [requireUser, validate(GetRegionSchema), GetRegionHandler]);
+  app.get('/api/regions', [
+    requireUser,
+    validate(GetRegionSchema),
+    GetRegionHandler,
+  ]);
 
-  app.delete('/api/regions/:regionId', [requireUser, validate(DeleteRegionSchema), DeleteRegionHandler]);
+  app.delete('/api/regions/:regionId', [
+    requireUser,
+    validate(DeleteRegionSchema),
+    DeleteRegionHandler,
+  ]);
 }
 
 export default regionRoutes;

@@ -42,13 +42,12 @@ exports.UserSchema = new mongoose_1.default.Schema({
         required: true,
         unique: true,
     },
-    sickness: {
+    phone: {
         type: String,
+        required: true,
+        unique: true,
     },
-    treatments: {
-        type: String,
-    },
-    effect: {
+    city: {
         type: String,
     },
 }, { timestamps: true });

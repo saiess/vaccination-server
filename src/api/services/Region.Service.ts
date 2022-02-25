@@ -1,9 +1,14 @@
 import {
-  DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery,
+  DocumentDefinition,
+  FilterQuery,
+  QueryOptions,
+  UpdateQuery,
 } from 'mongoose';
 import RegionModel, { RegionDocument } from '../models/Region';
 
-export async function CreatRegion(input: DocumentDefinition<Omit<RegionDocument, 'createdAt' | 'updatedAt'>>) {
+export async function CreatRegion(
+  input: DocumentDefinition<Omit<RegionDocument, 'createdAt' | 'updatedAt'>>,
+) {
   return RegionModel.create(input);
 }
 

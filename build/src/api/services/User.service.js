@@ -12,6 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FindUser = exports.ValidatePassword = void 0;
+/* eslint-disable implicit-arrow-linebreak */
+const lodash_1 = require("lodash");
 const User_1 = __importDefault(require("../models/User"));
 const CreateUser = (input) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,4 +24,16 @@ const CreateUser = (input) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error(e);
     }
 });
+const ValidatePassword = ({ email, }) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield User_1.default.findOne({ email });
+    if (!user) {
+        return false;
+    }
+    // const isValid = await user.comparePassword(password);
+    // if (!isValid) return false;
+    return (0, lodash_1.omit)(user.toJSON(), 'password');
+});
+exports.ValidatePassword = ValidatePassword;
+const FindUser = (query) => __awaiter(void 0, void 0, void 0, function* () { return User_1.default.findOne(query).lean(); });
+exports.FindUser = FindUser;
 exports.default = CreateUser;

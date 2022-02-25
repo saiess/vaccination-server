@@ -1,8 +1,11 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { omit } from 'lodash';
 import { DocumentDefinition, FilterQuery } from 'mongoose';
 import UserModel, { UserDocument } from '../models/User';
 
-const CreateUser = async (input: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updatedAt'>>) => {
+const CreateUser = async (
+  input: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updatedAt'>>,
+) => {
   try {
     return await UserModel.create(input);
   } catch (e: any) {
@@ -10,7 +13,12 @@ const CreateUser = async (input: DocumentDefinition<Omit<UserDocument, 'createdA
   }
 };
 
-export const ValidatePassword = async ({ email }:{email: string, password: string}) => {
+export const ValidatePassword = async ({
+  email,
+}: {
+  email: string;
+  password: string;
+}) => {
   const user = await UserModel.findOne({ email });
 
   if (!user) {
@@ -24,6 +32,7 @@ export const ValidatePassword = async ({ email }:{email: string, password: strin
   return omit(user.toJSON(), 'password');
 };
 
-export const FindUser = async (query: FilterQuery<UserDocument>) => UserModel.findOne(query).lean();
+export const FindUser = async (query: FilterQuery<UserDocument>) =>
+  UserModel.findOne(query).lean();
 
 export default CreateUser;

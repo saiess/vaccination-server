@@ -1,5 +1,9 @@
 import { Express, Request, Response } from 'express';
-import { CreateSessionHandler, DeleteSessionHandler, GetUserSessionHandler } from '../controllers/Session.Controller';
+import {
+  CreateSessionHandler,
+  DeleteSessionHandler,
+  GetUserSessionHandler,
+} from '../controllers/Session.Controller';
 import creatUserHandler from '../controllers/User.Controller';
 import requireUser from '../middlewares/requireUser';
 import validate from '../middlewares/validateResource';
@@ -13,7 +17,11 @@ function userRoutes(app: Express) {
 
   app.post('/api/users', validate(creatUserSchema), creatUserHandler);
 
-  app.post('/api/sessions', validate(CreateSessionSchema), CreateSessionHandler);
+  app.post(
+    '/api/sessions',
+    validate(CreateSessionSchema),
+    CreateSessionHandler,
+  );
 
   app.get('/api/sessions', requireUser, GetUserSessionHandler);
 

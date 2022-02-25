@@ -3,8 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
 const creatUserSchema = (0, zod_1.object)({
     body: (0, zod_1.object)({
-        name: (0, zod_1.string)({
-            required_error: 'Name is required',
+        firstname: (0, zod_1.string)({
+            required_error: 'first name is required',
+        }),
+        lastname: (0, zod_1.string)({
+            required_error: 'last name is required',
+        }),
+        cin: (0, zod_1.string)({
+            required_error: 'CIN is required',
+        }),
+        phone: (0, zod_1.string)({
+            required_error: 'Phone is required',
+        }),
+        city: (0, zod_1.string)({
+            required_error: 'City is required',
         }),
         password: (0, zod_1.string)({
             required_error: 'Password is required',

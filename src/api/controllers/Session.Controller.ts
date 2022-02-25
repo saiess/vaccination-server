@@ -2,7 +2,10 @@
 import config from 'config';
 import { Request, Response } from 'express';
 import { SignJwt } from '../../utils/Jwt.Utiles';
-import CreatSession, { FindSessions, UpdateSessions } from '../services/Session.Service';
+import CreatSession, {
+  FindSessions,
+  UpdateSessions,
+} from '../services/Session.Service';
 import { ValidatePassword } from '../services/User.service';
 
 export const CreateSessionHandler = async (req: Request, res: Response) => {

@@ -23,8 +23,10 @@ export async function UpdateSessions(
   return SessionModel.updateOne(query, update);
 }
 
-export async function reIssueAccessToken({ refreshToken }: {
-  refreshToken: string
+export async function reIssueAccessToken({
+  refreshToken,
+}: {
+  refreshToken: string;
 }) {
   const { decoded } = VerifyJwt(refreshToken);
 

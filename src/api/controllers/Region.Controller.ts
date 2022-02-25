@@ -1,13 +1,22 @@
 /* eslint-disable no-underscore-dangle */
 import { Request, Response } from 'express';
 import {
-  CreateRegionInput, UpdateRegionInput, GetRegionInput, DeleteRegionInput,
+  CreateRegionInput,
+  UpdateRegionInput,
+  GetRegionInput,
+  DeleteRegionInput,
 } from '../schema/Region.Schema';
 import {
-  CreatRegion, DeleteRegion, FindAndUpdateRegion, FindRegion,
+  CreatRegion,
+  DeleteRegion,
+  FindAndUpdateRegion,
+  FindRegion,
 } from '../services/Region.Service';
 
-export async function CreateRegionHandler(req: Request<{}, {}, CreateRegionInput['body']>, res: Response) {
+export async function CreateRegionHandler(
+  req: Request<{}, {}, CreateRegionInput['body']>,
+  res: Response,
+) {
   const userId = res.locals.user._id;
 
   const { body } = req;
@@ -20,7 +29,10 @@ export async function CreateRegionHandler(req: Request<{}, {}, CreateRegionInput
   return res.send(region);
 }
 
-export async function UpdateRegionHandler(req: Request<UpdateRegionInput['params']>, res: Response) {
+export async function UpdateRegionHandler(
+  req: Request<UpdateRegionInput['params']>,
+  res: Response,
+) {
   const userId = res.locals.user._id;
 
   const regionId = req.params.RegionId;
@@ -33,16 +45,21 @@ export async function UpdateRegionHandler(req: Request<UpdateRegionInput['params
     return res.sendStatus(404);
   }
 
-  if (region.user !== userId) {
+  if (String(region.user) !== userId) {
     return res.sendStatus(403);
   }
 
-  const updatedRegion = await FindAndUpdateRegion({ regionId }, update, { new: true });
+  const updatedRegion = await FindAndUpdateRegion({ regionId }, update, {
+    new: true,
+  });
 
   return res.send(updatedRegion);
 }
 
-export async function GetRegionHandler(req: Request<GetRegionInput['params']>, res: Response) {
+export async function GetRegionHandler(
+  req: Request<GetRegionInput['params']>,
+  res: Response,
+) {
   const regionId = req.params.RegionId;
   const region = await FindRegion({ regionId });
 
@@ -53,7 +70,10 @@ export async function GetRegionHandler(req: Request<GetRegionInput['params']>, r
   return res.send(region);
 }
 
-export async function DeleteRegionHandler(req: Request<DeleteRegionInput['params']>, res: Response) {
+export async function DeleteRegionHandler(
+  req: Request<DeleteRegionInput['params']>,
+  res: Response,
+) {
   const userId = res.locals.user._id;
 
   const regionId = req.params.RegionId;
@@ -64,7 +84,7 @@ export async function DeleteRegionHandler(req: Request<DeleteRegionInput['params
     return res.sendStatus(404);
   }
 
-  if (region.user !== userId) {
+  if (String(region.user) !== userId) {
     return res.sendStatus(403);
   }
 
