@@ -1,13 +1,13 @@
 /* eslint-disable implicit-arrow-linebreak */
 import { omit } from 'lodash';
-import { DocumentDefinition, FilterQuery } from 'mongoose';
-import UserModel, { UserDocument } from '../models/User';
+import { FilterQuery } from 'mongoose';
+import UserModel, { UserDocument, UserInput } from '../models/User';
 
-const CreateUser = async (
-  input: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updatedAt'>>,
-) => {
+export const CreateUser = async (input: UserInput) => {
   try {
-    return await UserModel.create(input);
+    const user = await UserModel.create({ ...input, role: 'user' });
+
+    return omit(user.toJSON(), 'password');
   } catch (e: any) {
     throw new Error(e);
   }
@@ -34,5 +34,3 @@ export const ValidatePassword = async ({
 
 export const FindUser = async (query: FilterQuery<UserDocument>) =>
   UserModel.findOne(query).lean();
-
-export default CreateUser;

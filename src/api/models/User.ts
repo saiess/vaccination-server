@@ -2,12 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable func-names */
 import mongoose from 'mongoose';
-
 import bcrypt from 'bcrypt';
-
 import config from 'config';
 
-export interface UserDocument extends mongoose.Document {
+export interface UserInput {
   firstname: string;
   lastname: string;
   email: string;
@@ -15,6 +13,10 @@ export interface UserDocument extends mongoose.Document {
   cin: string;
   phone: string;
   city: string;
+  role?: string;
+}
+
+export interface UserDocument extends UserInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
   // comparePassword(candidatePassword: string): Promise<boolean>;
@@ -40,15 +42,16 @@ export const UserSchema = new mongoose.Schema(
     },
     cin: {
       type: String,
-      required: true,
       unique: true,
     },
     phone: {
       type: String,
-      required: true,
       unique: true,
     },
     city: {
+      type: String,
+    },
+    role: {
       type: String,
     },
   },

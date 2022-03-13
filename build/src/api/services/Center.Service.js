@@ -12,29 +12,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRegion = exports.FindAndUpdateRegion = exports.FindRegion = exports.CreatRegion = void 0;
-const Region_1 = __importDefault(require("../models/Region"));
-function CreatRegion(input) {
+exports.DeleteCenter = exports.FindAndUpdateCenter = exports.FindCenter = exports.FindCenterById = exports.CreatCenter = void 0;
+const Center_1 = __importDefault(require("../models/Center"));
+function CreatCenter(input) {
     return __awaiter(this, void 0, void 0, function* () {
-        return Region_1.default.create(input);
+        return Center_1.default.create(input);
     });
 }
-exports.CreatRegion = CreatRegion;
-function FindRegion(query, options = { lean: true }) {
+exports.CreatCenter = CreatCenter;
+function FindCenterById(centerId, options = { lean: true }) {
     return __awaiter(this, void 0, void 0, function* () {
-        return Region_1.default.findOne(query, {}, options);
+        try {
+            return yield Center_1.default.findById(centerId, {}, options);
+        }
+        catch (_a) {
+            return null;
+        }
     });
 }
-exports.FindRegion = FindRegion;
-function FindAndUpdateRegion(query, update, options) {
+exports.FindCenterById = FindCenterById;
+function FindCenter(query, options = { lean: true }) {
     return __awaiter(this, void 0, void 0, function* () {
-        return Region_1.default.findOneAndUpdate(query, update, options);
+        return Center_1.default.find(query, {}, options);
     });
 }
-exports.FindAndUpdateRegion = FindAndUpdateRegion;
-function DeleteRegion(query) {
+exports.FindCenter = FindCenter;
+function FindAndUpdateCenter(
+// query: FilterQuery<CenterDocument>,
+centerId, update, options) {
     return __awaiter(this, void 0, void 0, function* () {
-        return Region_1.default.deleteOne(query);
+        return Center_1.default.findByIdAndUpdate(centerId, update, options);
     });
 }
-exports.DeleteRegion = DeleteRegion;
+exports.FindAndUpdateCenter = FindAndUpdateCenter;
+function DeleteCenter(centerId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return Center_1.default.findByIdAndDelete(centerId);
+    });
+}
+exports.DeleteCenter = DeleteCenter;

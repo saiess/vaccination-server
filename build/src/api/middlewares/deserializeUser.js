@@ -13,7 +13,7 @@ const lodash_1 = require("lodash");
 const Jwt_Utiles_1 = require("../../utils/Jwt.Utiles");
 const Session_Service_1 = require("../services/Session.Service");
 const deserializeUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const accessToken = (0, lodash_1.get)(req, 'headrs.authorization', '').replace(/^Bearer\s/, '');
+    const accessToken = (0, lodash_1.get)(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
     const refreshToken = (0, lodash_1.get)(req, 'headers.x-refesh');
     if (!accessToken) {
         return next();

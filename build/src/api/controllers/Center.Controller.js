@@ -9,60 +9,61 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteRegionHandler = exports.GetRegionHandler = exports.UpdateRegionHandler = exports.CreateRegionHandler = void 0;
-const Region_Service_1 = require("../services/Region.Service");
-function CreateRegionHandler(req, res) {
+exports.DeleteCenterHandler = exports.GetCenterHandler = exports.UpdateCenterHandler = exports.CreateCenterHandler = void 0;
+const Center_Service_1 = require("../services/Center.Service");
+function CreateCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
         const { body } = req;
-        const region = yield (0, Region_Service_1.CreatRegion)(Object.assign(Object.assign({}, body), { user: userId }));
-        return res.send(region);
+        const center = yield (0, Center_Service_1.CreatCenter)(Object.assign(Object.assign({}, body), { user: userId }));
+        return res.send(center);
     });
 }
-exports.CreateRegionHandler = CreateRegionHandler;
-function UpdateRegionHandler(req, res) {
+exports.CreateCenterHandler = CreateCenterHandler;
+function UpdateCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
-        const regionId = req.params.RegionId;
+        const { centerId } = req.params;
         const update = req.body;
-        const region = yield (0, Region_Service_1.FindRegion)({ regionId });
-        if (!region) {
+        const center = yield (0, Center_Service_1.FindCenter)({ centerId });
+        if (!center) {
             return res.sendStatus(404);
         }
-        if (region.user !== userId) {
+        if (String(center.user) !== userId) {
             return res.sendStatus(403);
         }
-        const updatedRegion = yield (0, Region_Service_1.FindAndUpdateRegion)({ regionId }, update, {
+        const updatedCenter = yield (0, Center_Service_1.FindAndUpdateCenter)(centerId, update, {
             new: true,
         });
-        return res.send(updatedRegion);
+        return res.send(updatedCenter);
     });
 }
-exports.UpdateRegionHandler = UpdateRegionHandler;
-function GetRegionHandler(req, res) {
+exports.UpdateCenterHandler = UpdateCenterHandler;
+function GetCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const regionId = req.params.RegionId;
-        const region = yield (0, Region_Service_1.FindRegion)({ regionId });
-        if (!region) {
+        const { centerId } = req.params;
+        const center = yield (0, Center_Service_1.FindCenterById)(centerId);
+        console.log(center);
+        if (!center) {
             return res.sendStatus(404);
         }
-        return res.send(region);
+        return res.send(center);
     });
 }
-exports.GetRegionHandler = GetRegionHandler;
-function DeleteRegionHandler(req, res) {
+exports.GetCenterHandler = GetCenterHandler;
+function DeleteCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
-        const regionId = req.params.RegionId;
-        const region = yield (0, Region_Service_1.FindRegion)({ regionId });
-        if (!region) {
+        const { centerId } = req.params;
+        const center = yield (0, Center_Service_1.FindCenter)({ centerId });
+        if (!center) {
             return res.sendStatus(404);
         }
-        if (region.user !== userId) {
+        if (String(center.user) !== userId) {
             return res.sendStatus(403);
         }
-        yield (0, Region_Service_1.DeleteRegion)({ regionId });
+        yield (0, Center_Service_1.DeleteCenter)(centerId);
         return res.sendStatus(200);
     });
 }
-exports.DeleteRegionHandler = DeleteRegionHandler;
+exports.DeleteCenterHandler = DeleteCenterHandler;

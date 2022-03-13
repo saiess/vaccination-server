@@ -3,34 +3,39 @@
 /* eslint-disable func-names */
 import mongoose from 'mongoose';
 import { customAlphabet } from 'nanoid';
-import { string } from 'zod';
 import { UserDocument } from './User';
 
 const nanoid = customAlphabet('abcdefghijklmnopqrstvwz0123456789', 10);
 
-export interface RegionDocument extends mongoose.Document {
+export interface CenterInput {
   user: UserDocument['_id'];
   name: string;
+  region: string;
+}
+
+export interface CenterDocument extends CenterInput, mongoose.Document {
+  user: UserDocument['_id'];
   createdAt: Date;
   updatedAt: Date;
 }
-export const RegionSchema = new mongoose.Schema(
+export const CenterSchema = new mongoose.Schema<CenterDocument>(
   {
-    RegionId: {
-      type: String,
-      required: true,
-      unique: true,
-      default: () => `region_${nanoid()}`,
-    },
+    // centerId: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    //   default: () => `center_${nanoid()}`,
+    // },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
     name: { type: String, required: true },
+    region: { type: String, required: true },
   },
   { timestamps: true },
 );
 
-const RegionModel = mongoose.model<RegionDocument>('Region', RegionSchema);
+const CenterModel = mongoose.model<CenterDocument>('Center', CenterSchema);
 
-export default RegionModel;
+export default CenterModel;

@@ -8,7 +8,7 @@ const deserializeUser = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const accessToken = get(req, 'headrs.authorization', '').replace(
+  const accessToken = get(req, 'headers.authorization', '').replace(
     /^Bearer\s/,
     '',
   );

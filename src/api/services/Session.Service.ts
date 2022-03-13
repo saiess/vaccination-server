@@ -6,7 +6,7 @@ import { SignJwt, VerifyJwt } from '../../utils/Jwt.Utiles';
 import SessionModel, { SessionDocument } from '../models/Session';
 import { FindUser } from './User.service';
 
-const CreatSession = async (userId: string, userAgent: string) => {
+export const CreatSession = async (userId: string, userAgent: string) => {
   const session = await SessionModel.create({ user: userId, userAgent });
 
   return session.toJSON();
@@ -47,5 +47,3 @@ export async function reIssueAccessToken({
 
   return accessToken;
 }
-
-export default CreatSession;

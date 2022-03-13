@@ -24,6 +24,7 @@ function Database() {
         }
         catch (error) {
             logger_1.default.error('could not connect to DB');
+            logger_1.default.error(error);
             process.exit(1);
         }
     });

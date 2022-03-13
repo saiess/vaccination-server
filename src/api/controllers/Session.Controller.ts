@@ -2,7 +2,7 @@
 import config from 'config';
 import { Request, Response } from 'express';
 import { SignJwt } from '../../utils/Jwt.Utiles';
-import CreatSession, {
+import { CreatSession,
   FindSessions,
   UpdateSessions,
 } from '../services/Session.Service';
