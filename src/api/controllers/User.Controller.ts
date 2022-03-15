@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 // import { omit } from 'lodash';
 import logger from '../../utils/logger';
 import { CreatUserIput } from '../schema/User.Schema';
-import { CreateUser } from '../services/User.service';
+import { CreateUser, FindUsers } from '../services/User.service';
 
-const creatUserHandler = async (
+export const creatUserHandler = async (
   req: Request<{}, {}, CreatUserIput['body']>,
   res: Response,
 ) => {
@@ -17,4 +17,15 @@ const creatUserHandler = async (
   }
 };
 
-export default creatUserHandler;
+// ** get all centers handler ***
+export async function getAllUser(req: Request, res: Response) {
+  const center = await FindUsers();
+  console.log(center);
+  if (!center) {
+    return res.sendStatus(404);
+  }
+
+  return res.send(center);
+}
+
+export const getCurrentUser = async (req: Request, res: Response) => res.send(res.locals.user);

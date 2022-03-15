@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_1 = require("lodash");
+// import { omit } from 'lodash';
 const logger_1 = __importDefault(require("../../utils/logger"));
-const User_service_1 = __importDefault(require("../services/User.service"));
+const User_service_1 = require("../services/User.service");
 const creatUserHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield (0, User_service_1.default)(req.body);
-        return res.send((0, lodash_1.omit)(user.toJSON(), 'password'));
+        const user = yield (0, User_service_1.CreateUser)(req.body);
+        return res.send(user);
     }
     catch (e) {
         logger_1.default.error(e);

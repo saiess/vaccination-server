@@ -19,9 +19,14 @@ function centerRoutes(app) {
         Center_Controller_1.UpdateCenterHandler,
     ]);
     app.get('/api/centers/:centerId', [
-        requireUser_1.default,
+        // requireUser,
         (0, validateResource_1.default)(Center_Schema_1.GetCenterSchema),
         Center_Controller_1.GetCenterHandler,
+    ]);
+    app.get('/api/centers/', [
+        // requireUser,
+        // validate(GetCenterSchema),
+        Center_Controller_1.GetAllCentersHandler,
     ]);
     app.delete('/api/centers/:centerId', [
         requireUser_1.default,

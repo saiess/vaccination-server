@@ -4,7 +4,11 @@ import {
   DeleteSessionHandler,
   GetUserSessionHandler,
 } from '../controllers/Session.Controller';
-import creatUserHandler from '../controllers/User.Controller';
+import {
+  creatUserHandler,
+  getAllUser,
+  getCurrentUser,
+} from '../controllers/User.Controller';
 import requireUser from '../middlewares/requireUser';
 import validate from '../middlewares/validateResource';
 import CreateSessionSchema from '../schema/Session.Schema';
@@ -16,6 +20,8 @@ function userRoutes(app: Express) {
   });
 
   app.post('/api/users', validate(creatUserSchema), creatUserHandler);
+  app.get('/api/me', requireUser, getCurrentUser);
+  app.get('/api/users', getAllUser);
 
   app.post(
     '/api/sessions',

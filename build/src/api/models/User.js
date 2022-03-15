@@ -39,15 +39,16 @@ exports.UserSchema = new mongoose_1.default.Schema({
     },
     cin: {
         type: String,
-        required: true,
         unique: true,
     },
     phone: {
         type: String,
-        required: true,
         unique: true,
     },
     city: {
+        type: String,
+    },
+    role: {
         type: String,
     },
 }, { timestamps: true });

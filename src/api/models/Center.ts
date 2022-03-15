@@ -5,8 +5,6 @@ import mongoose from 'mongoose';
 import { customAlphabet } from 'nanoid';
 import { UserDocument } from './User';
 
-const nanoid = customAlphabet('abcdefghijklmnopqrstvwz0123456789', 10);
-
 export interface CenterInput {
   user: UserDocument['_id'];
   name: string;

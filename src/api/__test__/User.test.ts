@@ -38,7 +38,7 @@ const sessionPayload = {
 };
 
 describe('user', () => {
-  // * user registration
+  // * user registration **
 
   describe('user registration', () => {
     describe('given the username and password are valid', () => {
@@ -80,9 +80,6 @@ describe('user', () => {
     });
   });
 
-  // * the username and password get validation
-  //* verify that the password must match
-  //* verify that the handler handles any errors
   //* creating a user session
   describe('given user session', () => {
     describe('given the username and password are valid', () => {

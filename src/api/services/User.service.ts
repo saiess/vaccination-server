@@ -1,6 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 import { omit } from 'lodash';
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, QueryOptions } from 'mongoose';
 import UserModel, { UserDocument, UserInput } from '../models/User';
 
 export const CreateUser = async (input: UserInput) => {
@@ -12,6 +12,13 @@ export const CreateUser = async (input: UserInput) => {
     throw new Error(e);
   }
 };
+
+export async function FindUsers(
+  query: FilterQuery<UserDocument> = {},
+  options: QueryOptions = { lean: true },
+) {
+  return UserModel.find(query, {}, options);
+}
 
 export const ValidatePassword = async ({
   email,

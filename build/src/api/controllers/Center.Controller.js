@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteCenterHandler = exports.GetCenterHandler = exports.UpdateCenterHandler = exports.CreateCenterHandler = void 0;
+exports.DeleteCenterHandler = exports.GetAllCentersHandler = exports.GetCenterHandler = exports.UpdateCenterHandler = exports.CreateCenterHandler = void 0;
 const Center_Service_1 = require("../services/Center.Service");
+// ** create center handler ***
 function CreateCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
@@ -20,12 +21,13 @@ function CreateCenterHandler(req, res) {
     });
 }
 exports.CreateCenterHandler = CreateCenterHandler;
+// ** update center handler ***
 function UpdateCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
         const { centerId } = req.params;
         const update = req.body;
-        const center = yield (0, Center_Service_1.FindCenter)({ centerId });
+        const center = yield (0, Center_Service_1.FindCenterById)(centerId);
         if (!center) {
             return res.sendStatus(404);
         }
@@ -39,6 +41,7 @@ function UpdateCenterHandler(req, res) {
     });
 }
 exports.UpdateCenterHandler = UpdateCenterHandler;
+// ** get one center handler ***
 function GetCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { centerId } = req.params;
@@ -51,11 +54,24 @@ function GetCenterHandler(req, res) {
     });
 }
 exports.GetCenterHandler = GetCenterHandler;
+// ** get all centerq handler ***
+function GetAllCentersHandler(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const center = yield (0, Center_Service_1.FindCenter)();
+        console.log(center);
+        if (!center) {
+            return res.sendStatus(404);
+        }
+        return res.send(center);
+    });
+}
+exports.GetAllCentersHandler = GetAllCentersHandler;
+// ** delete a center handler ***
 function DeleteCenterHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userId = res.locals.user._id;
         const { centerId } = req.params;
-        const center = yield (0, Center_Service_1.FindCenter)({ centerId });
+        const center = yield (0, Center_Service_1.FindCenterById)(centerId);
         if (!center) {
             return res.sendStatus(404);
         }

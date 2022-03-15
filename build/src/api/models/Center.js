@@ -11,12 +11,12 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const nanoid_1 = require("nanoid");
 const nanoid = (0, nanoid_1.customAlphabet)('abcdefghijklmnopqrstvwz0123456789', 10);
 exports.CenterSchema = new mongoose_1.default.Schema({
-    centerId: {
-        type: String,
-        required: true,
-        unique: true,
-        default: () => `center_${nanoid()}`,
-    },
+    // centerId: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    //   default: () => `center_${nanoid()}`,
+    // },
     user: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: 'User',

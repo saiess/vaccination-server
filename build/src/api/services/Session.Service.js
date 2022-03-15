@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reIssueAccessToken = exports.UpdateSessions = exports.FindSessions = void 0;
+exports.reIssueAccessToken = exports.UpdateSessions = exports.FindSessions = exports.CreatSession = void 0;
 /* eslint-disable no-underscore-dangle */
 const config_1 = __importDefault(require("config"));
 const lodash_1 = require("lodash");
@@ -23,6 +23,7 @@ const CreatSession = (userId, userAgent) => __awaiter(void 0, void 0, void 0, fu
     const session = yield Session_1.default.create({ user: userId, userAgent });
     return session.toJSON();
 });
+exports.CreatSession = CreatSession;
 function FindSessions(query) {
     return __awaiter(this, void 0, void 0, function* () {
         return Session_1.default.find(query).lean();
@@ -51,4 +52,3 @@ function reIssueAccessToken({ refreshToken, }) {
     });
 }
 exports.reIssueAccessToken = reIssueAccessToken;
-exports.default = CreatSession;

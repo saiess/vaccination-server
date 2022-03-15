@@ -2,7 +2,8 @@
 import config from 'config';
 import { Request, Response } from 'express';
 import { SignJwt } from '../../utils/Jwt.Utiles';
-import { CreatSession,
+import {
+  CreatSession,
   FindSessions,
   UpdateSessions,
 } from '../services/Session.Service';
@@ -31,6 +32,25 @@ export const CreateSessionHandler = async (req: Request, res: Response) => {
     { expiresIn: config.get('refreshTokentl') }, // 1 year
   );
   //   return access & refresh tokens
+
+  res.cookie('accessToken', accessToken, {
+    maxAge: 900000, //* 15 mins *
+    httpOnly: true,
+    domain: 'localhost',
+    path: '/',
+    sameSite: 'strict',
+    secure: false,
+  });
+
+  res.cookie('refreshToken', refreshToken, {
+    maxAge: 3.154e10, //* 1 year *
+    httpOnly: true,
+    domain: 'localhost',
+    path: '/',
+    sameSite: 'strict',
+    secure: false,
+  });
+
   return res.send({ accessToken, refreshToken });
 };
 

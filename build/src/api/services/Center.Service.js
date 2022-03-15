@@ -31,7 +31,7 @@ function FindCenterById(centerId, options = { lean: true }) {
     });
 }
 exports.FindCenterById = FindCenterById;
-function FindCenter(query, options = { lean: true }) {
+function FindCenter(query = {}, options = { lean: true }) {
     return __awaiter(this, void 0, void 0, function* () {
         return Center_1.default.find(query, {}, options);
     });

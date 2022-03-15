@@ -8,7 +8,7 @@ export async function CreatCenter(input: CenterInput) {
 export async function FindCenterById(
   centerId: string,
   options: QueryOptions = { lean: true },
-):Promise <CenterDocument | null > {
+): Promise<CenterDocument | null> {
   try {
     return await CenterModel.findById(centerId, {}, options);
   } catch {

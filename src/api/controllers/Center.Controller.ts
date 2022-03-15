@@ -74,7 +74,7 @@ export async function GetCenterHandler(
   return res.send(center);
 }
 
-// ** get all centerq handler ***
+// ** get all centers handler ***
 export async function GetAllCentersHandler(
   req: Request<GetCenterInput['params']>,
   res: Response,
