@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getCurrentUser = exports.getAllUser = exports.creatUserHandler = void 0;
 // import { omit } from 'lodash';
 const logger_1 = __importDefault(require("../../utils/logger"));
 const User_service_1 = require("../services/User.service");
@@ -25,4 +26,18 @@ const creatUserHandler = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return res.status(409).send(e.message);
     }
 });
-exports.default = creatUserHandler;
+exports.creatUserHandler = creatUserHandler;
+// ** get all centers handler ***
+function getAllUser(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const center = yield (0, User_service_1.FindUsers)();
+        console.log(center);
+        if (!center) {
+            return res.sendStatus(404);
+        }
+        return res.send(center);
+    });
+}
+exports.getAllUser = getAllUser;
+const getCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.send(res.locals.user); });
+exports.getCurrentUser = getCurrentUser;

@@ -31,6 +31,22 @@ const CreateSessionHandler = (req, res) => __awaiter(void 0, void 0, void 0, fun
     // create a refresh token
     const refreshToken = (0, Jwt_Utiles_1.SignJwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: config_1.default.get('refreshTokentl') });
     //   return access & refresh tokens
+    res.cookie('accessToken', accessToken, {
+        maxAge: 900000,
+        httpOnly: true,
+        domain: 'localhost',
+        path: '/',
+        sameSite: 'strict',
+        secure: false,
+    });
+    res.cookie('refreshToken', refreshToken, {
+        maxAge: 3.154e10,
+        httpOnly: true,
+        domain: 'localhost',
+        path: '/',
+        sameSite: 'strict',
+        secure: false,
+    });
     return res.send({ accessToken, refreshToken });
 });
 exports.CreateSessionHandler = CreateSessionHandler;

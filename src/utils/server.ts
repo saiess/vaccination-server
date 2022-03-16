@@ -9,9 +9,7 @@ import centerRoutes from '../api/routers/Center.Route';
 function createServer() {
   const app = express();
 
-  app.use(
-    cookieParser(),
-  );
+  app.use(cookieParser());
   app.use(deserializeUser);
   app.use(express.json());
   app.use(

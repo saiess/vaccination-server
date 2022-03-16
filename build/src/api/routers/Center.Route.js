@@ -29,7 +29,7 @@ function centerRoutes(app) {
         Center_Controller_1.GetAllCentersHandler,
     ]);
     app.delete('/api/centers/:centerId', [
-        requireUser_1.default,
+        // requireUser,
         (0, validateResource_1.default)(Center_Schema_1.DeleteCenterSchema),
         Center_Controller_1.DeleteCenterHandler,
     ]);

@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { get } from 'lodash';
 import { Request, Response, NextFunction } from 'express';
 import { VerifyJwt } from '../../utils/Jwt.Utiles';
@@ -8,9 +9,11 @@ const deserializeUser = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const accessToken = get(req, 'cookies.accessToken')
-    || get(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
-  const refreshToken = get(req, 'cookies.refreshToken') || get(req, 'headers.x-refesh');
+  const accessToken =
+    get(req, 'cookies.accessToken') ||
+    get(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
+  const refreshToken =
+    get(req, 'cookies.refreshToken') || get(req, 'headers.x-refesh');
 
   console.log({ accessToken, refreshToken, coonkies: req.cookies });
   if (!accessToken) {

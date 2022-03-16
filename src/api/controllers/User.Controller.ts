@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { Request, Response } from 'express';
 // import { omit } from 'lodash';
 import logger from '../../utils/logger';
@@ -28,4 +29,5 @@ export async function getAllUser(req: Request, res: Response) {
   return res.send(center);
 }
 
-export const getCurrentUser = async (req: Request, res: Response) => res.send(res.locals.user);
+export const getCurrentUser = async (req: Request, res: Response) =>
+  res.send(res.locals.user);

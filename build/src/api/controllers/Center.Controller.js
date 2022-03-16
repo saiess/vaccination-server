@@ -54,7 +54,7 @@ function GetCenterHandler(req, res) {
     });
 }
 exports.GetCenterHandler = GetCenterHandler;
-// ** get all centerq handler ***
+// ** get all centers handler ***
 function GetAllCentersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const center = yield (0, Center_Service_1.FindCenter)();

@@ -69,7 +69,7 @@ const sessionPayload = {
     __v: 0,
 };
 describe('user', () => {
-    // * user registration
+    // * user registration **
     describe('user registration', () => {
         describe('given the username and password are valid', () => {
             it('should return the user payload', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -101,9 +101,6 @@ describe('user', () => {
             }));
         });
     });
-    // * the username and password get validation
-    //* verify that the password must match
-    //* verify that the handler handles any errors
     //* creating a user session
     describe('given user session', () => {
         describe('given the username and password are valid', () => {
